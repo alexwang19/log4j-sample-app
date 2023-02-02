@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-hello-world-demo
+  namespace: demo-apps
+  labels:
+    app: spring-hello-world-app-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-hello-world-app-demo
+  template:
+    metadata:
+      labels:
+        app: spring-hello-world-app-demo
+    spec:
+      containers:
+      - name: spring-hello-world-app-demo-container
+        image: public.ecr.aws/k2v0b9e1/demo:demo-app
+        imagePullPolicy: Always
+        ports:
+          - name: web
+            containerPort: 8080
